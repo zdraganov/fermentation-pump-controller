@@ -1,0 +1,14 @@
+[Unit]
+Description=Fermentation Pump Evening Cycle
+After=network.target
+
+[Service]
+Type=oneshot
+User=pi
+WorkingDirectory=/home/pi/fermentation-pump-controller
+ExecStart=/usr/bin/python3 /home/pi/fermentation-pump-controller/src/pump_control.py
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

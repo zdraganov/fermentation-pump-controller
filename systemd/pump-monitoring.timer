@@ -1,0 +1,10 @@
+[Unit]
+Description=Fermentation Pump Morning Timer
+Requires=pump-morning.service
+
+[Timer]
+OnCalendar=*-*-* 09:00:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target
