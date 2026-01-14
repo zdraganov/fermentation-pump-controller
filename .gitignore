@@ -21,6 +21,8 @@ parts/
 sdist/
 var/
 wheels/
+cache/
+output/
 *.egg-info/
 .installed.cfg
 *.egg
@@ -45,11 +47,21 @@ secrets.yaml
 .DS_Store
 Thumbs.db
 
-# Generated files
-*.png
-*.jpg
-*.jpeg
-temperature_graph.png
+# Raspberry Pi image generation
+pi-gen/
+rpi-image-gen/
+rpi-image-stage/
+
+# Packer (deprecated)
+*.pkr.hcl
+install-packer*.sh
+install-pi-gen.sh
+install-rpi-image-gen.sh
+setup-pi-gen.sh
+setup-rpi-image-gen.sh
+fermentation.yaml
+Dockerfile.builder
+docker-compose.yml
 
 # Raspberry Pi specific
 *.pyc
