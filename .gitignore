@@ -32,6 +32,8 @@ output/
 logs/*.log
 !logs/.gitkeep
 
+cache/
+
 # IDE
 .vscode/
 .idea/

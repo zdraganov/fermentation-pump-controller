@@ -42,7 +42,21 @@ build: ## Build custom Raspberry Pi image for use with Raspberry Pi Imager
 	fi
 	chmod +x scripts/build-image.sh
 	sudo ./scripts/build-image.sh
+	chmod +x scripts/create-imager-manifest.sh
+	./scripts/create-imager-manifest.sh
+
+create-manifest: ## Create Raspberry Pi Imager manifest for customization support
+	@echo "📝 Creating manifest..."
+	chmod +x scripts/create-imager-manifest.sh
+	./scripts/create-imager-manifest.sh
+
+open-imager: ## Open Raspberry Pi Imager with custom manifest
+	@echo "🖥️  Opening Raspberry Pi Imager..."
+	/Applications/Raspberry\ Pi\ Imager.app/Contents/MacOS/rpi-imager --repo $(shell pwd)/output/os_list_local.json
 
 clean: ## Clean output and temporary files
 	rm -rf $(OUTPUT_DIR)/*
 	rm -rf cache/*
+
+clean-cache: ## Clean cached base image
+	rm -f cache/2024-03-15-raspios-bookworm-arm64-lite.img.xz

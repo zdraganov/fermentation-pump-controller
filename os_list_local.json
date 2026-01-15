@@ -1,0 +1,73 @@
+{
+  "imager": {
+    "latest_version": "2.0.3",
+    "url": "https://www.raspberrypi.com/software/",
+    "devices": [
+      {
+        "name": "Raspberry Pi 5",
+        "tags": [
+          "pi5-64bit",
+          "pi5-32bit"
+        ],
+        "icon": "https://downloads.raspberrypi.com/imager/icons/RPi_5.png",
+        "description": "Raspberry Pi 5, 500 / 500+, and Compute Module 5",
+        "matching_type": "exclusive",
+        "capabilities": []
+      },
+      {
+        "name": "Raspberry Pi 4",
+        "tags": [
+          "pi4-64bit",
+          "pi4-32bit"
+        ],
+        "default": false,
+        "icon": "https://downloads.raspberrypi.com/imager/icons/RPi_4.png",
+        "description": "Raspberry Pi 4 Model B, 400, and Compute Module 4 / 4S",
+        "matching_type": "inclusive",
+        "capabilities": []
+      },
+      {
+        "name": "Raspberry Pi 3",
+        "tags": [
+          "pi3-64bit",
+          "pi3-32bit"
+        ],
+        "default": false,
+        "icon": "https://downloads.raspberrypi.com/imager/icons/RPi_3.png",
+        "description": "Raspberry Pi 3 Model A+ / B / B+ and Compute Module 3 / 3+",
+        "matching_type": "inclusive",
+        "capabilities": []
+      }
+    ]
+  },
+  "os_list": [
+    {
+      "name": "Fermentation Pi Controller",
+      "description": "Custom Raspberry Pi OS Lite (32-bit) with fermentation controller pre-installed. Use Raspberry Pi Imager customization to configure WiFi, SSH, and hostname.",
+      "icon": "https://downloads.raspberrypi.com/raspios_armhf/Raspberry_Pi_OS_(32-bit).png",
+      "url": "file:///Users/zhivko/Dev/zdraganov/fermentation-pump-controller/output/fermentation-pi-2026-01-15.img",
+      "website": "https://github.com/zdraganov/fermentation-pump-controller",
+      "release_date": "2026-01-15",
+      "extract_size": 7063207936,
+      "extract_sha256": "",
+      "image_download_size": 7063207936,
+      "image_download_sha256": "",
+      "devices": [
+        "pi3-32bit",
+        "pi3-64bit",
+        "pi4-32bit",
+        "pi4-64bit",
+        "pi5-64bit"
+      ],
+      "init_format": "systemd",
+      "architecture": "armv8",
+      "capabilities": [
+        "rpi_connect",
+        "i2c",
+        "spi",
+        "onewire",
+        "serial"
+      ]
+    }
+  ]
+}
