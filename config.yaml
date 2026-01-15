@@ -1,0 +1,31 @@
+pump:
+  run_time: 600  # секунди (10 минути)
+  gpio_pin: 17   # GPIO пин за relay
+
+temperature:
+  min: 15.0      # °C - минимална работна температура
+  max: 30.0      # °C - максимална работна температура
+  warning: 25.0  # °C - предупредителна температура
+  check_interval: 30  # секунди между проверки
+  gpio_pin: 4    # GPIO пин за DS18B20 (1-Wire)
+
+schedule:
+  morning: "09:00"  # Сутрешен цикъл
+  evening: "21:00"  # Вечерен цикъл
+
+logging:
+  pump_log: "logs/fermentation.log"
+  temp_log: "logs/temperature.log"
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+
+web:
+  enabled: true
+  host: "0.0.0.0"
+  port: 5000
+  auto_refresh: 30  # секунди
+
+# Алерти (опционално)
+alerts:
+  enabled: false
+  email: "zhivko.draganov@gmail.com"
+  # За бъдеща имплементация

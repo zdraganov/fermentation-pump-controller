@@ -21,7 +21,7 @@ vm-shell: ## Open shell in Multipass VM
 
 vm-build: ## Build image in Multipass VM
 	@echo "🚀 Building image in VM..."
-	multipass exec $(VM_NAME) -- bash -c "cd /workspace && make build-simple"
+	multipass exec $(VM_NAME) -- bash -c "cd /workspace && make build"
 
 vm-clean: ## Delete Multipass VM
 	@echo "🗑️  Deleting VM..."
@@ -33,7 +33,7 @@ vm-restart: ## Restart Multipass VM
 	multipass restart $(VM_NAME)
 
 # Build targets
-build-simple: ## Build custom Raspberry Pi image
+build: ## Build custom Raspberry Pi image for use with Raspberry Pi Imager
 	@echo "🍓 Building image..."
 	mkdir -p cache
 	@if [ ! -f cache/2024-03-15-raspios-bookworm-arm64-lite.img.xz ]; then \

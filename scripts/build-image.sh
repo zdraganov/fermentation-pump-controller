@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-echo "🍓 Building custom Raspberry Pi image..."
+echo "🍓 Building custom Raspberry Pi image for use with Raspberry Pi Imager..."
 
 # Variables
 CACHE_DIR="cache"
@@ -28,9 +28,6 @@ sudo mount "${LOOP_DEVICE}p1" "$MOUNT_DIR/boot"
 # Customize the image
 echo "Customizing image..."
 
-# Enable SSH
-sudo touch "$MOUNT_DIR/boot/ssh"
-
 # Copy project files
 sudo mkdir -p "$MOUNT_DIR/home/pi/fermentation-controller"
 sudo cp -r src "$MOUNT_DIR/home/pi/fermentation-controller/"
@@ -45,6 +42,25 @@ sudo chown -R 1000:1000 "$MOUNT_DIR/home/pi/fermentation-controller"
 # Enable 1-Wire
 echo "dtoverlay=w1-gpio,gpiopin=4" | sudo tee -a "$MOUNT_DIR/boot/config.txt"
 
+# Install Raspberry Pi Connect (chroot into the image)
+echo "Installing Raspberry Pi Connect..."
+sudo mount --bind /dev "$MOUNT_DIR/dev"
+sudo mount --bind /sys "$MOUNT_DIR/sys"
+sudo mount --bind /proc "$MOUNT_DIR/proc"
+
+# Install rpi-connect in chroot
+sudo chroot "$MOUNT_DIR" /bin/bash << 'CHROOT'
+apt-get update
+apt-get install -y rpi-connect
+CHROOT
+
+# Unmount bind mounts
+sudo umount "$MOUNT_DIR/proc"
+sudo umount "$MOUNT_DIR/sys"
+sudo umount "$MOUNT_DIR/dev"
+
+echo "✅ Raspberry Pi Connect pre-installed and enabled"
+
 # Cleanup and unmount
 echo "Cleaning up..."
 sync
@@ -54,4 +70,14 @@ sudo rmdir "$MOUNT_DIR"
 sudo losetup -d "$LOOP_DEVICE"
 
 echo "✅ Custom Raspberry Pi image created: $OUTPUT_IMAGE"
-echo "Flash it to SD card with: sudo dd if=$OUTPUT_IMAGE of=/dev/sdX bs=4M status=progress"
+echo ""
+echo "Next steps:"
+echo "1. Open Raspberry Pi Imager"
+echo "2. Choose OS → Use custom → Select: $OUTPUT_IMAGE"
+echo "3. Click the settings gear (⚙️) to configure:"
+echo "   - WiFi credentials"
+echo "   - Hostname (e.g., fermentation-pi)"
+echo "   - Enable SSH"
+echo "   - Enable Raspberry Pi Connect"
+echo "4. Flash to SD card"
+echo "5. After boot, SSH in and run: cd ~/fermentation-controller && ./install.sh"
