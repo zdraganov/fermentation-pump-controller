@@ -1,0 +1,16 @@
+[Unit]
+Description=Fermentation TUI Dashboard
+After=network.target
+
+[Service]
+Type=simple
+User=raspberry
+WorkingDirectory=/home/raspberry/fermentation-controller
+ExecStart=/home/raspberry/fermentation-controller/venv/bin/python /home/raspberry/fermentation-controller/src/tui_dashboard.py
+Restart=always
+StandardInput=tty
+StandardOutput=tty
+TTYPath=/dev/tty1
+
+[Install]
+WantedBy=multi-user.target

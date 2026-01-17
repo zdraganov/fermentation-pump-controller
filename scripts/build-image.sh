@@ -51,16 +51,26 @@ sudo mount "${LOOP_DEVICE}p1" "$MOUNT_DIR/boot"
 # Customize the image
 echo "Customizing image..."
 
-# Copy project files
-sudo mkdir -p "$MOUNT_DIR/home/pi/fermentation-controller"
-sudo cp -r src "$MOUNT_DIR/home/pi/fermentation-controller/"
-sudo cp -r systemd "$MOUNT_DIR/home/pi/fermentation-controller/"
-sudo cp config.yaml "$MOUNT_DIR/home/pi/fermentation-controller/"
-sudo cp requirements.txt "$MOUNT_DIR/home/pi/fermentation-controller/"
-sudo cp install.sh "$MOUNT_DIR/home/pi/fermentation-controller/"
+# Create empty project directory structure
+sudo mkdir -p "$MOUNT_DIR/home/raspberry/fermentation-controller/src"
+sudo mkdir -p "$MOUNT_DIR/home/raspberry/fermentation-controller/systemd"
+sudo mkdir -p "$MOUNT_DIR/home/raspberry/fermentation-controller/logs"
+
+# Create a README for the user
+cat << 'README' | sudo tee "$MOUNT_DIR/home/raspberry/fermentation-controller/README.txt"
+Fermentation Pump Controller
+
+To deploy your code:
+1. From your Mac: scp -r * pi@fermentation-pi.local:~/fermentation-controller/
+2. On the Pi: cd ~/fermentation-controller && sudo ./install.sh
+
+Or use git:
+1. git clone https://github.com/zdraganov/fermentation-pump-controller.git
+2. cd fermentation-pump-controller && sudo ./install.sh
+README
 
 # Set ownership (pi user is UID 1000)
-sudo chown -R 1000:1000 "$MOUNT_DIR/home/pi/fermentation-controller"
+sudo chown -R 1000:1000 "$MOUNT_DIR/home/raspberry/fermentation-controller"
 
 # Enable 1-Wire
 echo "dtoverlay=w1-gpio,gpiopin=4" | sudo tee -a "$MOUNT_DIR/boot/config.txt"
@@ -104,6 +114,8 @@ echo "   - Hostname (e.g., fermentation-pi)"
 echo "   - Enable SSH"
 echo "   - Enable Raspberry Pi Connect"
 echo "4. Flash to SD card"
-echo "5. After boot, SSH in and run: rpi-connect signin"
-echo "6. Visit https://connect.raspberrypi.com to access remotely"
-echo "7. Run: cd ~/fermentation-controller && ./install.sh"
+echo "5. After boot, copy your code:"
+echo "   scp -r * raspberry@raspberry.lan:~/fermentation-controller/"
+echo "6. SSH in and run: cd ~/fermentation-controller && sudo ./install.sh"
+echo "7. Sign in to rpi-connect: rpi-connect signin"
+echo "8. Visit https://connect.raspberrypi.com to access remotely"

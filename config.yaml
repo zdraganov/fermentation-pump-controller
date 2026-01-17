@@ -1,31 +1,19 @@
 pump:
-  run_time: 600  # секунди (10 минути)
-  gpio_pin: 17   # GPIO пин за relay
+  run_time: 600  # seconds (10 minutes)
+  gpio_pin: 17   # GPIO pin for relay (BCM 17 = Physical Pin 11)
 
 temperature:
-  min: 15.0      # °C - минимална работна температура
-  max: 30.0      # °C - максимална работна температура
-  warning: 25.0  # °C - предупредителна температура
-  check_interval: 30  # секунди между проверки
-  gpio_pin: 4    # GPIO пин за DS18B20 (1-Wire)
+  min: 15.0      # °C - minimum operating temperature
+  max: 30.0      # °C - maximum operating temperature
+  warning: 25.0  # °C - warning temperature
+  check_interval: 30  # seconds between checks
+  gpio_pin: 4    # GPIO pin for DS18B20 (BCM 4 = Physical Pin 7, 1-Wire)
 
 schedule:
-  morning: "09:00"  # Сутрешен цикъл
-  evening: "21:00"  # Вечерен цикъл
+  morning: "09:00"  # Morning cycle
+  evening: "21:00"  # Evening cycle
 
 logging:
   pump_log: "logs/fermentation.log"
   temp_log: "logs/temperature.log"
   level: "INFO"  # DEBUG, INFO, WARNING, ERROR
-
-web:
-  enabled: true
-  host: "0.0.0.0"
-  port: 5000
-  auto_refresh: 30  # секунди
-
-# Алерти (опционално)
-alerts:
-  enabled: false
-  email: "zhivko.draganov@gmail.com"
-  # За бъдеща имплементация

@@ -1,5 +1,5 @@
 [Unit]
-Description=Fermentation Pump Evening Cycle
+Description=Fermentation Pump Morning Cycle
 After=network.target
 
 [Service]

@@ -1,10 +1,9 @@
 [Unit]
 Description=Fermentation Pump Evening Timer
-Requires=pump-evening.service
 
 [Timer]
 OnCalendar=*-*-* 21:00:00
-Persistent=true
+Persistent=false
 
 [Install]
 WantedBy=timers.target

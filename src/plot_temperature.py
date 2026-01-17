@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Генериране на графики"""
+"""Generate temperature graphs"""
 
 import re
 import matplotlib
@@ -25,17 +25,17 @@ if Path(LOG_FILE).exists():
 if dates:
     plt.figure(figsize=(12, 6))
     plt.plot(dates, temps, marker='o', linewidth=2, color='#667eea')
-    plt.axhline(y=20, color='g', linestyle='--', alpha=0.7, label='Оптимално (20°C)')
-    plt.axhline(y=25, color='orange', linestyle='--', alpha=0.7, label='Внимание (25°C)')
-    plt.axhline(y=30, color='r', linestyle='--', alpha=0.7, label='Максимум (30°C)')
-    plt.xlabel('Време')
-    plt.ylabel('Температура (°C)')
-    plt.title('Температура на ферментацията')
+    plt.axhline(y=20, color='g', linestyle='--', alpha=0.7, label='Optimal (20°C)')
+    plt.axhline(y=25, color='orange', linestyle='--', alpha=0.7, label='Warning (25°C)')
+    plt.axhline(y=30, color='r', linestyle='--', alpha=0.7, label='Maximum (30°C)')
+    plt.xlabel('Time')
+    plt.ylabel('Temperature (°C)')
+    plt.title('Fermentation Temperature')
     plt.legend()
     plt.grid(True, alpha=0.3)
     plt.xticks(rotation=45)
     plt.tight_layout()
     plt.savefig(OUTPUT, dpi=150)
-    print(f"✓ График записан: {OUTPUT}")
+    print(f"✓ Graph saved: {OUTPUT}")
 else:
-    print("❌ Няма данни за график")
+    print("❌ No data for graph")
