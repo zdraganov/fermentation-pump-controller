@@ -75,6 +75,9 @@ sudo chown -R 1000:1000 "$MOUNT_DIR/home/raspberry/fermentation-controller"
 # Enable 1-Wire
 echo "dtoverlay=w1-gpio,gpiopin=4" | sudo tee -a "$MOUNT_DIR/boot/config.txt"
 
+# Enable UART
+echo "enable_uart=1" | sudo tee -a "$MOUNT_DIR/boot/config.txt"
+
 # Install rpi-connect (chroot into the image)
 echo "Installing rpi-connect..."
 sudo mount --bind /dev "$MOUNT_DIR/dev"

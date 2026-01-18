@@ -87,7 +87,7 @@ def draw_dashboard(stdscr):
         # Temperature
         temp = PumpController.get_temperature()
         if temp:
-            temp_str = f"{temp:.1f}°C"
+            temp_str = f"{temp:.1f}C"
             temp_color = curses.color_pair(2) if temp < 25 else curses.color_pair(3)
         else:
             temp_str = "N/A"

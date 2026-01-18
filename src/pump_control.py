@@ -217,7 +217,7 @@ class PumpController:
         Check if temperature is in safe range
         
         Args:
-            temp: Temperature in °C
+            temp: Temperature in C
             
         Returns:
             bool: True if safe
@@ -227,20 +227,20 @@ class PumpController:
         if temp < temp_config['min']:
             logging.warning(
                 f"⚠️ Temperature too low "
-                f"({temp}°C < {temp_config['min']}°C)"
+                f"({temp}C < {temp_config['min']}C)"
             )
             return False
         
         if temp > temp_config['max']:
             logging.error(
                 f"❌ Temperature too high "
-                f"({temp}°C > {temp_config['max']}°C)"
+                f"({temp}C > {temp_config['max']}C)"
             )
             return False
         
         if temp > temp_config['warning']:
             logging.warning(
-                f"⚠️ WARNING: High temperature ({temp}°C)"
+                f"⚠️ WARNING: High temperature ({temp}C)"
             )
         
         return True
@@ -272,7 +272,7 @@ class PumpController:
                 logging.error("❌ Cannot read temperature!")
                 return False
             
-            logging.info(f"🌡️  Initial temperature: {temp}°C")
+            logging.info(f"🌡️  Initial temperature: {temp}C")
             
             if not self.check_temperature_safe(temp):
                 logging.warning("⚠️ Skipping cycle due to temperature")
@@ -303,7 +303,7 @@ class PumpController:
                     temp = self.temp_sensor.read_temperature()
                     if temp is not None:
                         logging.info(
-                            f"🌡️  Temperature: {temp}°C | "
+                            f"🌡️  Temperature: {temp}C | "
                             f"Time: {elapsed}/{run_time}s"
                         )
                         
@@ -324,8 +324,8 @@ class PumpController:
                 final_temp = self.temp_sensor.read_temperature()
                 if final_temp and initial_temp:
                     temp_change = final_temp - initial_temp
-                    logging.info(f"🌡️  Final temperature: {final_temp}°C")
-                    logging.info(f"📊 Change: {temp_change:+.2f}°C")
+                    logging.info(f"🌡️  Final temperature: {final_temp}C")
+                    logging.info(f"📊 Change: {temp_change:+.2f}C")
             
             logging.info("✅ Cycle completed successfully")
             self._write_state('completed')
